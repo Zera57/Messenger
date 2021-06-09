@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.util.ArrayList;
 
@@ -11,8 +12,9 @@ public class ChatServer implements EventListener{
     ArrayList<Connection> connectionList;
 
     private ChatServer() {
-        System.out.println("Server running....");
+        connectionList = new ArrayList<>();
         try (ServerSocket serverSocket = new ServerSocket(8000)) {
+            System.out.println("Server " + InetAddress.getLocalHost().getHostAddress() + " : 8000" + " running....");
             while (true) {
                 try {
                     new Connection(serverSocket.accept(), this);
@@ -28,18 +30,22 @@ public class ChatServer implements EventListener{
 
     @Override
     public synchronized void connectEvent(Connection connection) {
+        System.out.println("Connected: " + connection);
         connectionList.add(connection);
         sendAll("Connected: " + connection);
     }
 
     @Override
     public synchronized void disconnectEvent(Connection connection) {
+        System.out.println("Disconnected: " + connection);
         connectionList.remove(connection);
         sendAll("Disconnected: " + connection);
     }
 
     @Override
     public synchronized void sendEvent(Connection connection, String value) {
+        System.out.println(connection + " msg: " + value);
+//        sendAll(connection + " msg: " + value);
         sendAll(value);
     }
 
@@ -49,7 +55,6 @@ public class ChatServer implements EventListener{
     }
 
     private void sendAll(String value) {
-
         for (var connection : connectionList) { connection.sendMsg(value); }
     }
 }
