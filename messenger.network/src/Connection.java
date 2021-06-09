@@ -29,12 +29,15 @@ public class Connection {
                 }
             }
         });
+        rxThread.start();
     }
 
     public synchronized void sendMsg(String msg) {
         try {
-            out.write(msg + "\r\n");
-            out.flush();
+            if (msg != null && msg.length() > 0) {
+                out.write(msg + "\r\n");
+                out.flush();
+            }
         } catch (IOException e) {
             eventListener.exceptionEvent(this, e);
             disconnect();
