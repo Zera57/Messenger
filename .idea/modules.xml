@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/messenger.client/messenger.client.iml" filepath="$PROJECT_DIR$/messenger.client/messenger.client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/messenger.network/messenger.network.iml" filepath="$PROJECT_DIR$/messenger.network/messenger.network.iml" />
+      <module fileurl="file://$PROJECT_DIR$/messenger.server/messenger.server.iml" filepath="$PROJECT_DIR$/messenger.server/messenger.server.iml" />
+    </modules>
+  </component>
+</project>
